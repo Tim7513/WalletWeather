@@ -1,10 +1,11 @@
 .App {
   min-height: 100vh;
-  background: #f5f5dc;
+  background: #0a0a0f;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
-    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.05) 1px, transparent 1px);
-  background-size: 40px 40px, 60px 60px;
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+  background-size: 60px 60px, 80px 80px, 100% 100%;
   position: relative;
   overflow-x: hidden;
 }

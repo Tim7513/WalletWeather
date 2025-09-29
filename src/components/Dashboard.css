@@ -107,22 +107,95 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-.reset-data-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: white;
-  padding: 12px 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+/* Data Management Section */
+.data-management-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
 }
 
-.reset-data-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+.data-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.data-indicator {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.6));
+}
+
+.data-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.data-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-type {
+  font-size: 0.85rem;
+  color: #00ffff;
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(0, 255, 255, 0.3);
+}
+
+.update-data-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  color: white;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.update-data-btn:hover {
+  background: linear-gradient(135deg, #1f4470 0%, #26314e 100%);
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.btn-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.btn-subtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
 }
 
 /* Header Avatar */
@@ -160,7 +233,7 @@
   margin-bottom: 30px;
 }
 
-/* Card Styles - Scrapbook Style */
+/* Card Styles - Dark Tech */
 .dashboard-card {
   padding: 25px;
   cursor: pointer;
@@ -169,107 +242,123 @@
   min-height: 280px;
   display: flex;
   flex-direction: column;
-  background: #fefefe;
-  border: none;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 8px 12px 6px 14px;
   box-shadow: 
-    0 4px 12px rgba(0,0,0,0.15),
-    0 2px 4px rgba(0,0,0,0.1);
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: rotate(-0.5deg);
   transition: all 0.3s ease;
 }
 
-/* Washi Tape Effects */
+/* Tech Accent Lines */
 .dashboard-card::before {
   content: '';
   position: absolute;
-  top: -8px;
-  left: 20px;
-  width: 60px;
-  height: 25px;
-  background: linear-gradient(45deg, 
-    rgba(255, 182, 193, 0.8) 0%,
-    rgba(255, 192, 203, 0.9) 50%,
-    rgba(255, 182, 193, 0.8) 100%);
-  border-radius: 3px;
-  transform: rotate(-15deg);
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(0, 255, 255, 0.8) 20%,
+    rgba(0, 255, 255, 1) 50%,
+    rgba(0, 255, 255, 0.8) 80%,
+    transparent 100%);
+  border-radius: 1px;
   z-index: 2;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .dashboard-card::after {
   content: '';
   position: absolute;
-  bottom: -6px;
-  right: 30px;
-  width: 40px;
-  height: 20px;
-  background: linear-gradient(45deg, 
-    rgba(173, 216, 230, 0.8) 0%,
-    rgba(135, 206, 235, 0.9) 50%,
-    rgba(173, 216, 230, 0.8) 100%);
-  border-radius: 3px;
-  transform: rotate(25deg);
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 0, 255, 0.6) 30%,
+    rgba(255, 0, 255, 0.8) 50%,
+    rgba(255, 0, 255, 0.6) 70%,
+    transparent 100%);
+  border-radius: 1px;
   z-index: 2;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Individual card variations */
+/* Individual card variations - Dark Tech */
 .dashboard-card:nth-child(1) { 
   transform: rotate(1.2deg); 
-  background: #fffef8;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-color: rgba(0, 255, 255, 0.3);
 }
 
 .dashboard-card:nth-child(2) { 
   transform: rotate(-0.8deg); 
-  background: #fefffe;
+  background: linear-gradient(135deg, #2a1a2e 0%, #26213e 50%, #1f3460 100%);
+  border-color: rgba(255, 0, 255, 0.3);
 }
 
 .dashboard-card:nth-child(3) { 
   transform: rotate(0.5deg); 
-  background: #fffffb;
+  background: linear-gradient(135deg, #1a2a1e 0%, #16353e 50%, #0f4460 100%);
+  border-color: rgba(0, 255, 128, 0.3);
 }
 
 .dashboard-card:nth-child(4) { 
   transform: rotate(-1.1deg); 
-  background: #fffffe;
+  background: linear-gradient(135deg, #2a1a1e 0%, #35163e 50%, #44065f 100%);
+  border-color: rgba(255, 128, 0, 0.3);
 }
 
 .dashboard-card:nth-child(5) { 
   transform: rotate(0.7deg); 
-  background: #ffffef;
+  background: linear-gradient(135deg, #1a1a3e 0%, #16214e 50%, #0f3470 100%);
+  border-color: rgba(128, 0, 255, 0.3);
 }
 
 .dashboard-card:nth-child(6) { 
   transform: rotate(-0.3deg); 
-  background: #fffff9;
+  background: linear-gradient(135deg, #3a1a2e 0%, #36213e 50%, #2f3460 100%);
+  border-color: rgba(255, 255, 0, 0.3);
 }
 
-/* Different tape colors for each card */
+/* Different accent line colors for each card */
 .dashboard-card:nth-child(2)::before {
-  background: linear-gradient(45deg, 
-    rgba(255, 255, 182, 0.8) 0%,
-    rgba(255, 255, 192, 0.9) 50%,
-    rgba(255, 255, 182, 0.8) 100%);
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 0, 255, 0.8) 20%,
+    rgba(255, 0, 255, 1) 50%,
+    rgba(255, 0, 255, 0.8) 80%,
+    transparent 100%);
 }
 
 .dashboard-card:nth-child(3)::before {
-  background: linear-gradient(45deg, 
-    rgba(182, 255, 182, 0.8) 0%,
-    rgba(192, 255, 192, 0.9) 50%,
-    rgba(182, 255, 182, 0.8) 100%);
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(0, 255, 128, 0.8) 20%,
+    rgba(0, 255, 128, 1) 50%,
+    rgba(0, 255, 128, 0.8) 80%,
+    transparent 100%);
 }
 
 .dashboard-card:nth-child(4)::before {
-  background: linear-gradient(45deg, 
-    rgba(255, 182, 255, 0.8) 0%,
-    rgba(255, 192, 255, 0.9) 50%,
-    rgba(255, 182, 255, 0.8) 100%);
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 128, 0, 0.8) 20%,
+    rgba(255, 128, 0, 1) 50%,
+    rgba(255, 128, 0, 0.8) 80%,
+    transparent 100%);
 }
 
 .dashboard-card:hover {
   transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 
+    0 16px 32px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .card-header {

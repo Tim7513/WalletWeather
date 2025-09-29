@@ -8,13 +8,21 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
   const [activeTab, setActiveTab] = useState('welcome');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleDataSubmit = async (data) => {
+  const handleDataSubmit = async (data, source = 'Manual Entry') => {
     setIsProcessing(true);
     // Simulate processing time for better UX
     await new Promise(resolve => setTimeout(resolve, 1500));
-    onDataSubmit(data);
+    onDataSubmit(data, source);
     setIsProcessing(false);
     onClose();
+  };
+
+  const handleCSVSubmit = (data) => {
+    handleDataSubmit(data, 'CSV Upload');
+  };
+
+  const handleManualSubmit = (data) => {
+    handleDataSubmit(data, 'Manual Entry');
   };
 
   const handleDemoData = () => {
@@ -32,7 +40,7 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
         { name: 'Other', amount: 300, color: '#DDA0DD', percentage: 10 }
       ]
     };
-    handleDataSubmit(demoData);
+    handleDataSubmit(demoData, 'Demo Data');
   };
 
   const modalVariants = {
@@ -67,16 +75,24 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="modal-header">
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Welcome to Financial Time Machine
-            </motion.h2>
-            <button className="modal-close" onClick={onClose}>✕</button>
-          </div>
+                        <div className="modal-header">
+                <motion.h2
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  Welcome to Money Check
+                </motion.h2>
+                <motion.button 
+                  className="modal-close" 
+                  onClick={handleDemoData}
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  title="Close (uses demo data)"
+                >
+                  ✕
+                </motion.button>
+              </div>
 
           {/* Content */}
           <div className="modal-content">
@@ -108,6 +124,9 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                   <h3>How would you like to add your financial data?</h3>
                   <p className="privacy-message">
                     🔒 Your data never leaves your device. All processing happens locally in your browser.
+                  </p>
+                  <p className="close-info">
+                    💡 You can close this (X) to start with demo data
                   </p>
 
                   <div className="option-cards">
@@ -171,7 +190,7 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                     <h3>Upload Your Financial Data</h3>
                   </div>
                   <CSVUploader 
-                    onDataParsed={handleDataSubmit}
+                    onDataParsed={handleCSVSubmit}
                     isProcessing={isProcessing}
                   />
                 </motion.div>
@@ -200,7 +219,7 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                     <h3>Enter Your Financial Information</h3>
                   </div>
                   <ManualEntry 
-                    onDataSubmit={handleDataSubmit}
+                    onDataSubmit={handleManualSubmit}
                     isProcessing={isProcessing}
                   />
                 </motion.div>

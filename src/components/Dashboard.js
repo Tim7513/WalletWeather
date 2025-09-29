@@ -29,9 +29,10 @@ const Dashboard = () => {
     }
   }, []);
 
-  const handleDataSubmit = (data) => {
+  const handleDataSubmit = (data, source = 'Manual Entry') => {
     // Save to localStorage
     localStorage.setItem('financialTimeData', JSON.stringify(data));
+    localStorage.setItem('dataSource', source);
     setFinancialData(data);
     setShowDataModal(false);
   };
@@ -164,17 +165,34 @@ const Dashboard = () => {
               ${financialData.balance.toLocaleString()}
             </motion.span>
           </motion.div>
-          <motion.button
-            className="reset-data-btn"
-            onClick={handleDataReset}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <motion.div
+            className="data-management-section"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.6 }}
           >
-            🔄 Update Data
-          </motion.button>
+            <div className="data-status">
+              <span className="data-indicator">📊</span>
+              <div className="data-info">
+                <span className="data-label">Data Source</span>
+                <span className="data-type">
+                  {localStorage.getItem('dataSource') || 'Manual Entry'}
+                </span>
+              </div>
+            </div>
+            <motion.button
+              className="update-data-btn"
+              onClick={handleDataReset}
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="btn-icon">⚙️</span>
+              <div className="btn-content">
+                <span className="btn-title">Update Data</span>
+                <span className="btn-subtitle">CSV • Manual • Demo</span>
+              </div>
+            </motion.button>
+          </motion.div>
         </div>
       </motion.header>
 
