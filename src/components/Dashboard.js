@@ -4,7 +4,7 @@ import FinancialWeather from './FinancialWeather';
 import SpendingBubbles from './SpendingBubbles';
 import AIInsights from './AIInsights';
 import FinancialGarden from './FinancialGarden';
-import FinancialAvatar from './FinancialAvatar';
+import FullBodyAvatar from './FullBodyAvatar';
 import DataInputModal from './DataInputModal';
 import './Dashboard.css';
 
@@ -145,15 +145,7 @@ const Dashboard = () => {
           </motion.p>
         </div>
         
-        {/* Financial Avatar */}
-        <motion.div 
-          className="header-avatar"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.0, duration: 0.8 }}
-        >
-          <FinancialAvatar financialData={financialData} size="small" />
-        </motion.div>
+
         
         <div className="header-actions">
           <motion.div 
@@ -188,11 +180,26 @@ const Dashboard = () => {
 
       {/* Main Grid */}
       <div className="dashboard-grid">
+        {/* Full Body Avatar Card */}
+        <motion.div
+          className="dashboard-card glass avatar-card"
+          variants={cardVariants}
+          custom={1}
+          whileHover="hover"
+          onClick={() => setSelectedCard('avatar')}
+        >
+          <div className="card-header">
+            <h3>Your Financial Avatar</h3>
+            <span className="card-icon">🤖</span>
+          </div>
+          <FullBodyAvatar financialData={financialData} />
+        </motion.div>
+
         {/* Financial Weather Card */}
         <motion.div
           className="dashboard-card glass"
           variants={cardVariants}
-          custom={1}
+          custom={2}
           whileHover="hover"
           onClick={() => setSelectedCard('weather')}
         >
@@ -207,7 +214,7 @@ const Dashboard = () => {
         <motion.div
           className="dashboard-card glass spending-card"
           variants={cardVariants}
-          custom={2}
+          custom={3}
           whileHover="hover"
           onClick={() => setSelectedCard('spending')}
         >
@@ -222,7 +229,7 @@ const Dashboard = () => {
         <motion.div
           className="dashboard-card glass"
           variants={cardVariants}
-          custom={3}
+          custom={4}
           whileHover="hover"
           onClick={() => setSelectedCard('insights')}
         >
@@ -237,7 +244,7 @@ const Dashboard = () => {
         <motion.div
           className="dashboard-card glass garden-card"
           variants={cardVariants}
-          custom={4}
+          custom={5}
           whileHover="hover"
           onClick={() => setSelectedCard('garden')}
         >
@@ -252,7 +259,7 @@ const Dashboard = () => {
         <motion.div
           className="dashboard-card glass stats-card"
           variants={cardVariants}
-          custom={5}
+          custom={6}
           whileHover="hover"
         >
           <div className="card-header">
@@ -315,6 +322,7 @@ const Dashboard = () => {
                 ✕
               </button>
               <div className="modal-body">
+                {selectedCard === 'avatar' && <FullBodyAvatar financialData={financialData} expanded />}
                 {selectedCard === 'weather' && <FinancialWeather data={financialData} expanded />}
                 {selectedCard === 'spending' && <SpendingBubbles categories={financialData.categories} expanded />}
                 {selectedCard === 'insights' && <AIInsights data={financialData} expanded />}
