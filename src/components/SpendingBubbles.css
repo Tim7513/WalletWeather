@@ -1,0 +1,397 @@
+.spending-bubbles {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bubbles Container */
+.bubbles-container {
+  flex: 1;
+  position: relative;
+  min-height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.spending-bubbles.expanded .bubbles-container {
+  min-height: 450px;
+}
+
+/* Background Effects */
+.bubbles-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  animation: float-orb 8s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #FF6B6B, #FF8E53);
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #4ECDC4, #44A08D);
+  top: 60%;
+  right: 25%;
+  animation-delay: -2s;
+}
+
+.orb-3 {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #45B7D1, #96CEB4);
+  bottom: 20%;
+  left: 60%;
+  animation-delay: -4s;
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -15px) scale(1.1); }
+  66% { transform: translate(-15px, 10px) scale(0.9); }
+}
+
+/* Spending Bubbles */
+.spending-bubble {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.spending-bubble:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  z-index: 5;
+}
+
+/* Bubble Content */
+.bubble-content {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bubble-category {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+  opacity: 0.9;
+}
+
+.bubble-amount {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 2px;
+}
+
+.bubble-percentage {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* Bubble Shine Effect */
+.bubble-shine {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 40%, transparent 70%);
+  border-radius: 50%;
+  transform: rotate(-45deg);
+  z-index: 1;
+}
+
+/* Bubble Ripple Effect */
+.bubble-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Connection Lines */
+.bubble-connections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bubble Details Panel */
+.bubble-details {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.details-content h4 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.details-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.detail-item {
+  text-align: center;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.detail-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Summary Stats */
+.spending-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-item {
+  text-align: center;
+  flex: 1;
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #4ECDC4;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Spending Insights */
+.spending-insights {
+  margin-top: 30px;
+}
+
+.spending-insights h4 {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.insight-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.insight-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.insight-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bubbles-container {
+    min-height: 200px;
+  }
+  
+  .spending-bubbles.expanded .bubbles-container {
+    min-height: 350px;
+  }
+  
+  .bubble-content {
+    font-size: 0.8rem;
+  }
+  
+  .bubble-category {
+    font-size: 0.7rem;
+  }
+  
+  .bubble-amount {
+    font-size: 0.9rem;
+  }
+  
+  .bubble-percentage {
+    font-size: 0.6rem;
+  }
+  
+  .spending-summary {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .details-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .insights-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .insight-card {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bubbles-container {
+    min-height: 180px;
+  }
+  
+  .spending-bubbles.expanded .bubbles-container {
+    min-height: 300px;
+  }
+  
+  .bubble-details {
+    padding: 15px;
+  }
+  
+  .insight-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Special Effects for Different Bubble Sizes */
+.spending-bubble[style*="width: 30"] .bubble-content {
+  font-size: 0.7rem;
+}
+
+.spending-bubble[style*="width: 40"] .bubble-content {
+  font-size: 0.8rem;
+}
+
+.spending-bubble[style*="width: 50"] .bubble-content {
+  font-size: 0.9rem;
+}
+
+.spending-bubble[style*="width: 60"] .bubble-content,
+.spending-bubble[style*="width: 70"] .bubble-content,
+.spending-bubble[style*="width: 80"] .bubble-content {
+  font-size: 1rem;
+}
+
+/* Large bubbles get bigger text */
+.spending-bubble[style*="width: 90"] .bubble-content,
+.spending-bubble[style*="width: 100"] .bubble-content,
+.spending-bubble[style*="width: 110"] .bubble-content,
+.spending-bubble[style*="width: 120"] .bubble-content {
+  font-size: 1.1rem;
+}
+
+/* Animation for bubble entrance */
+@keyframes bubble-entrance {
+  0% {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Pulsing effect for active bubble */
+.spending-bubble.active {
+  animation: bubble-pulse 2s infinite;
+}
+
+@keyframes bubble-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+} 
