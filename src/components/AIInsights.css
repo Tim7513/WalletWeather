@@ -1,0 +1,489 @@
+.ai-insights {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Analyzing State */
+.ai-insights.analyzing {
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.analyzing-container {
+  text-align: center;
+  color: white;
+}
+
+.ai-brain {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.6));
+}
+
+.analyzing-container p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.analyzing-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ECDC4;
+}
+
+/* Insight Cards */
+.insight-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.insight-card:hover::before {
+  left: 100%;
+}
+
+.insight-card.compact {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Insight Header */
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.insight-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.insight-icon.large {
+  font-size: 2rem;
+}
+
+.insight-meta {
+  flex: 1;
+}
+
+.insight-meta h4 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.trend-icon {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Confidence Bar */
+.confidence-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.confidence-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.confidence-text {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Insight Message */
+.insight-message {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  font-weight: 400;
+}
+
+/* Insight Action */
+.insight-action {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 15px;
+}
+
+.insight-action strong {
+  color: #4ECDC4;
+  font-weight: 600;
+}
+
+/* Insight Potential */
+.insight-potential {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.2);
+  border-radius: 6px;
+}
+
+.potential-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.potential-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4ECDC4;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Insight Type Colors */
+.insight-card.positive {
+  border-left: 4px solid #4ECDC4;
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.insight-card.warning {
+  border-left: 4px solid #FFD93D;
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.insight-card.opportunity {
+  border-left: 4px solid #6BCF7F;
+  background: linear-gradient(135deg, rgba(107, 207, 127, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.insight-card.prediction {
+  border-left: 4px solid #A8E6CF;
+  background: linear-gradient(135deg, rgba(168, 230, 207, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* Expanded View */
+.insights-expanded {
+  height: 100%;
+}
+
+.insights-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.insight-card.full {
+  min-height: 200px;
+  transition: all 0.3s ease;
+}
+
+.insight-card.full:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* AI Confidence Summary */
+.ai-confidence-summary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-confidence-summary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(78, 205, 196, 0.1), transparent);
+  animation: rotate 10s linear infinite;
+  z-index: 1;
+}
+
+.ai-confidence-summary > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ai-confidence-summary h4 {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.confidence-circle {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.confidence-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #4ECDC4;
+  font-family: 'JetBrains Mono', monospace;
+  text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+.ai-confidence-summary p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Navigation Dots */
+.insight-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-dot:hover {
+  transform: scale(1.2);
+}
+
+.nav-dot.active {
+  transform: scale(1.3);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.nav-dot.active::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ai-brain {
+    font-size: 2.5rem;
+  }
+  
+  .analyzing-container p {
+    font-size: 0.9rem;
+  }
+  
+  .insight-header {
+    gap: 12px;
+  }
+  
+  .insight-icon {
+    font-size: 1.3rem;
+  }
+  
+  .insight-icon.large {
+    font-size: 1.6rem;
+  }
+  
+  .insight-meta h4 {
+    font-size: 1rem;
+  }
+  
+  .insight-message {
+    font-size: 0.9rem;
+  }
+  
+  .insights-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .insights-title {
+    font-size: 1.3rem;
+  }
+  
+  .ai-confidence-summary {
+    padding: 20px;
+  }
+  
+  .confidence-percentage {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-brain {
+    font-size: 2rem;
+  }
+  
+  .insight-card {
+    padding: 15px;
+  }
+  
+  .insight-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .insight-meta {
+    width: 100%;
+  }
+  
+  .insight-action {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  
+  .ai-confidence-summary {
+    padding: 15px;
+  }
+  
+  .confidence-circle svg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .confidence-percentage {
+    font-size: 1.3rem;
+  }
+}
+
+/* Special Effects */
+.insight-card.full::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.insight-card.full:hover::after {
+  opacity: 1;
+}
+
+/* Glow effects for different insight types */
+.insight-card.positive:hover {
+  box-shadow: 0 0 30px rgba(78, 205, 196, 0.3);
+}
+
+.insight-card.warning:hover {
+  box-shadow: 0 0 30px rgba(255, 217, 61, 0.3);
+}
+
+.insight-card.opportunity:hover {
+  box-shadow: 0 0 30px rgba(107, 207, 127, 0.3);
+}
+
+.insight-card.prediction:hover {
+  box-shadow: 0 0 30px rgba(168, 230, 207, 0.3);
+} 
