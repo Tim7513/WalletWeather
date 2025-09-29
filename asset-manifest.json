@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/WalletWeather/static/css/main.43b33d01.css",
+    "main.js": "/WalletWeather/static/js/main.3f5c0024.js",
+    "index.html": "/WalletWeather/index.html",
+    "main.43b33d01.css.map": "/WalletWeather/static/css/main.43b33d01.css.map",
+    "main.3f5c0024.js.map": "/WalletWeather/static/js/main.3f5c0024.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43b33d01.css",
+    "static/js/main.3f5c0024.js"
+  ]
+}
