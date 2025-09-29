@@ -4,7 +4,7 @@ import FinancialWeather from './FinancialWeather';
 import SpendingBubbles from './SpendingBubbles';
 import AIInsights from './AIInsights';
 import FinancialGarden from './FinancialGarden';
-import FullBodyAvatar from './FullBodyAvatar';
+import WeatherFaceAvatar from './WeatherFaceAvatar';
 import DataInputModal from './DataInputModal';
 import './Dashboard.css';
 
@@ -180,7 +180,7 @@ const Dashboard = () => {
 
       {/* Main Grid */}
       <div className="dashboard-grid">
-        {/* Full Body Avatar Card */}
+        {/* Weather Face Avatar Card */}
         <motion.div
           className="dashboard-card glass avatar-card"
           variants={cardVariants}
@@ -189,10 +189,12 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('avatar')}
         >
           <div className="card-header">
-            <h3>Your Financial Avatar</h3>
-            <span className="card-icon">🤖</span>
+            <h3>Your Financial Weather</h3>
+            <span className="card-icon">🌤️</span>
           </div>
-          <FullBodyAvatar financialData={financialData} />
+          <div className="avatar-container">
+            <WeatherFaceAvatar financialData={financialData} size="large" />
+          </div>
         </motion.div>
 
         {/* Financial Weather Card */}
@@ -322,7 +324,29 @@ const Dashboard = () => {
                 ✕
               </button>
               <div className="modal-body">
-                {selectedCard === 'avatar' && <FullBodyAvatar financialData={financialData} expanded />}
+                {selectedCard === 'avatar' && (
+                  <div className="modal-avatar-container">
+                    <WeatherFaceAvatar financialData={financialData} size="large" />
+                    <div className="avatar-details">
+                      <h3>Your Financial Weather Report</h3>
+                      <p>This avatar reflects your current financial health through weather patterns and facial expressions. The score is calculated from your surplus, emergency fund, and savings rate.</p>
+                      <div className="weather-legend">
+                        <div className="legend-item">
+                          <span className="weather-icon">☀️</span>
+                          <span>Sunny = Score 60+/100 (Good financial health)</span>
+                        </div>
+                        <div className="legend-item">
+                          <span className="weather-icon">☁️</span>
+                          <span>Rainy = Score below 60/100 (Needs improvement)</span>
+                        </div>
+                        <div className="legend-item">
+                          <span className="weather-icon">📊</span>
+                          <span>Score factors: Monthly surplus, emergency fund, savings rate</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 {selectedCard === 'weather' && <FinancialWeather data={financialData} expanded />}
                 {selectedCard === 'spending' && <SpendingBubbles categories={financialData.categories} expanded />}
                 {selectedCard === 'insights' && <AIInsights data={financialData} expanded />}

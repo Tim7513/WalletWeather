@@ -382,33 +382,85 @@
 
 /* Avatar Card */
 .avatar-card {
-  min-height: 600px;
-  grid-column: span 2;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar-card .card-header {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
+  align-self: stretch;
 }
 
-.avatar-card .fullbody-avatar {
+.avatar-container {
   flex: 1;
-  height: auto;
-  min-height: 500px;
-  background: none;
-  border: none;
-  backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Modal Avatar Styles */
+.modal-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.avatar-details {
+  text-align: center;
+  color: white;
+  max-width: 400px;
+}
+
+.avatar-details h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: #4ECDC4;
+}
+
+.avatar-details p {
+  margin: 0 0 1.5rem 0;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.5;
+}
+
+.weather-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
   padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.weather-icon {
+  font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {
   .avatar-card {
-    grid-column: span 1;
-    min-height: 500px;
+    min-height: 250px;
   }
   
-  .avatar-card .fullbody-avatar {
-    min-height: 400px;
+  .modal-avatar-container {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .avatar-details {
+    max-width: 300px;
   }
 } 

@@ -1,0 +1,413 @@
+.weather-face-avatar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/* Size variants */
+.weather-face-avatar.small {
+  --face-size: 60px;
+  --weather-size: 80px;
+  padding: 0.8rem;
+}
+
+.weather-face-avatar.medium {
+  --face-size: 80px;
+  --weather-size: 100px;
+  padding: 1rem;
+}
+
+.weather-face-avatar.large {
+  --face-size: 120px;
+  --weather-size: 140px;
+  padding: 1.5rem;
+}
+
+/* Weather Overlay */
+.weather-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.weather-overlay.sunny {
+  background: radial-gradient(circle at center, 
+    rgba(255, 223, 0, 0.2) 0%, 
+    rgba(255, 165, 0, 0.1) 50%, 
+    transparent 100%);
+}
+
+.weather-overlay.rainy {
+  background: radial-gradient(circle at center, 
+    rgba(100, 149, 237, 0.2) 0%, 
+    rgba(70, 130, 180, 0.1) 50%, 
+    transparent 100%);
+}
+
+/* Sun */
+.sun {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.8));
+}
+
+.sun-ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.8rem;
+  color: #FFD700;
+  transform-origin: center;
+}
+
+/* Cloud and Rain */
+.cloud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.rain-drop {
+  position: absolute;
+  font-size: 0.8rem;
+  top: 40px;
+  color: #4682B4;
+}
+
+/* Avatar Face */
+.avatar-face {
+  width: var(--face-size);
+  height: var(--face-size);
+  background: #F4D1A0;
+  border-radius: 50%;
+  position: relative;
+  border: 3px solid #E8C4A0;
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.1),
+    0 4px 12px rgba(0,0,0,0.15);
+  z-index: 2;
+  margin-bottom: 0.5rem;
+}
+
+/* Eyebrows - Add expression */
+.eyebrows {
+  position: absolute;
+  top: 22%;
+  left: 18%;
+  right: 18%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eyebrow {
+  width: 14px;
+  height: 3px;
+  background: #8B6F47;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.eyebrow.happy {
+  transform: rotate(-15deg);
+  background: #4ECDC4;
+  box-shadow: 0 0 4px rgba(78, 205, 196, 0.4);
+}
+
+.eyebrow.happy.right {
+  transform: rotate(15deg);
+}
+
+.eyebrow.sad {
+  transform: rotate(15deg) translateY(2px);
+  background: #FF6B6B;
+  box-shadow: 0 0 4px rgba(255, 107, 107, 0.4);
+}
+
+.eyebrow.sad.right {
+  transform: rotate(-15deg) translateY(2px);
+}
+
+.loading-dots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: rgba(0,0,0,0.5);
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+/* Eyes - Much larger and more emoji-like */
+.eyes {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  right: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eye {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  border: 2px solid #333;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.eye::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.eye.happy {
+  background: white;
+  border-color: #4ECDC4;
+  box-shadow: 0 0 8px rgba(78, 205, 196, 0.4), inset 0 2px 4px rgba(0,0,0,0.1);
+  transform: scaleY(0.6);
+}
+
+.eye.happy::after {
+  background: #4ECDC4;
+  box-shadow: 0 0 4px rgba(78, 205, 196, 0.6);
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+}
+
+.eye.sad {
+  background: white;
+  border-color: #FF6B6B;
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.4), inset 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(2px) scaleX(0.8);
+}
+
+.eye.sad::after {
+  background: #FF6B6B;
+  box-shadow: 0 0 4px rgba(255, 107, 107, 0.6);
+  top: 4px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+}
+
+/* Mouth - More emoji-like and expressive */
+.mouth {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s ease;
+}
+
+.mouth.happy {
+  width: 24px;
+  height: 12px;
+  background: #4ECDC4;
+  border-radius: 0 0 24px 24px;
+  border: 3px solid #4ECDC4;
+  border-top: none;
+  box-shadow: 0 0 12px rgba(78, 205, 196, 0.6);
+  position: relative;
+}
+
+.mouth.happy::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  right: 2px;
+  height: 6px;
+  background: #F4D1A0;
+  border-radius: 0 0 20px 20px;
+}
+
+.mouth.sad {
+  width: 20px;
+  height: 10px;
+  background: #FF6B6B;
+  border-radius: 20px 20px 0 0;
+  border: 3px solid #FF6B6B;
+  border-bottom: none;
+  transform: translateX(-50%) rotate(180deg);
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.6);
+  position: relative;
+}
+
+.mouth.sad::before {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 2px;
+  right: 2px;
+  height: 6px;
+  background: #F4D1A0;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Cheeks */
+.cheeks {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+}
+
+.cheek {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #FF69B4;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.cheek.left {
+  left: 15%;
+}
+
+.cheek.right {
+  right: 15%;
+}
+
+/* Health Score */
+.health-score {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-bottom: 0.3rem;
+}
+
+.weather-face-avatar.happy .health-score {
+  color: #4ECDC4;
+  background: rgba(78, 205, 196, 0.2);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+}
+
+.weather-face-avatar.sad .health-score {
+  color: #FF6B6B;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* Message */
+.avatar-message {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes loading-pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Mood-based backgrounds */
+.weather-face-avatar.happy {
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+  border-color: rgba(78, 205, 196, 0.4);
+}
+
+.weather-face-avatar.sad {
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+/* Loading state */
+.weather-face-avatar.loading {
+  opacity: 0.7;
+}
+
+.weather-face-avatar.loading .avatar-face {
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+/* Small size adjustments */
+.weather-face-avatar.small .health-score {
+  font-size: 1rem;
+  padding: 1px 6px;
+}
+
+.weather-face-avatar.small .avatar-message {
+  font-size: 0.7rem;
+}
+
+.weather-face-avatar.small .sun {
+  font-size: 1.2rem;
+  top: 5px;
+  right: 5px;
+}
+
+.weather-face-avatar.small .cloud {
+  font-size: 1.4rem;
+  top: 5px;
+  left: 5px;
+}
+
+/* Large size adjustments */
+.weather-face-avatar.large .health-score {
+  font-size: 1.5rem;
+  padding: 4px 12px;
+}
+
+.weather-face-avatar.large .avatar-message {
+  font-size: 1rem;
+}
+
+.weather-face-avatar.large .sun {
+  font-size: 2rem;
+  top: 15px;
+  right: 15px;
+}
+
+.weather-face-avatar.large .cloud {
+  font-size: 2.2rem;
+  top: 15px;
+  left: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .weather-face-avatar.medium {
+    --face-size: 70px;
+    --weather-size: 90px;
+  }
+  
+  .avatar-message {
+    font-size: 0.75rem;
+  }
+} 

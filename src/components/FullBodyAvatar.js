@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './FullBodyAvatar.css';
 
 const FullBodyAvatar = ({ financialData, expanded = false }) => {
@@ -281,256 +281,161 @@ const FullBodyAvatar = ({ financialData, expanded = false }) => {
     }
   };
 
-  return (
-    <div className={`fullbody-avatar ${avatarState.mood} ${expanded ? 'expanded' : ''}`}>
-      {/* Environment Effects */}
-      <div className="environment-effects">
-        {getEnvironmentEffects().map((effect, i) => (
+        return (
+        <div className={`fullbody-avatar ${avatarState.mood} ${expanded ? 'expanded' : ''}`}>
+          {/* Environment Effects */}
+          <div className="environment-effects">
+            {getEnvironmentEffects().map((effect, i) => (
+              <motion.div
+                key={i}
+                className="environment-item"
+                animate={{
+                  y: [0, -5, 0],
+                  opacity: [0.6, 1, 0.6],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{
+                  duration: 3 + i,
+                  repeat: Infinity,
+                  delay: i * 0.5,
+                  ease: "easeInOut"
+                }}
+                style={{
+                  left: `${15 + i * 20}%`,
+                  top: `${10 + (i % 2) * 15}%`
+                }}
+              >
+                {effect}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Simplified Cohesive Avatar */}
           <motion.div
-            key={i}
-            className="environment-item"
-            animate={{
-              y: [0, -5, 0],
-              opacity: [0.6, 1, 0.6],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: 3 + i,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut"
-            }}
+            className="avatar-silhouette"
+            animate={getAvatarAnimations()}
             style={{
-              left: `${15 + i * 20}%`,
-              top: `${10 + (i % 2) * 15}%`
+              background: `linear-gradient(180deg, 
+                ${avatarState.colors.hair} 0%, 
+                ${avatarState.colors.skin} 15%, 
+                ${avatarState.colors.shirt} 45%, 
+                ${avatarState.colors.pants || avatarState.colors.shirt} 75%, 
+                #2C3E50 100%)`
             }}
           >
-            {effect}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Main Avatar */}
-      <motion.div
-        className="avatar-main"
-        animate={getAvatarAnimations()}
-        style={{ zIndex: 10 }}
-      >
-        {/* Head */}
-        <div className="avatar-head" style={{ borderColor: avatarState.colors.skin }}>
-          <div className="hair" style={{ backgroundColor: avatarState.colors.hair }}></div>
-          <div className="face" style={{ backgroundColor: avatarState.colors.skin }}>
-            <div className="eyes">
-              <div className={`eye left ${avatarState.mood}`}>
-                <div className="pupil"></div>
+            {/* Simple Face */}
+            <div className="simple-face">
+              <div className={`simple-eyes ${avatarState.mood}`}>
+                <div className="simple-eye"></div>
+                <div className="simple-eye"></div>
               </div>
-              <div className={`eye right ${avatarState.mood}`}>
-                <div className="pupil"></div>
-              </div>
-            </div>
-            <div className="nose"></div>
-            <div className={`mouth ${avatarState.mood}`}></div>
-            
-            {/* Mood-specific facial features */}
-            {avatarState.mood === 'concerned' && (
-              <div className="worry-lines">
-                <div className="worry-line left"></div>
-                <div className="worry-line right"></div>
-              </div>
-            )}
-            
-            {avatarState.mood === 'stressed' && (
-              <div className="stress-indicators">
-                <div className="sweat-drop left">💦</div>
-                <div className="sweat-drop right">💦</div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Body */}
-        <div className="avatar-body">
-          {/* Torso */}
-          <div className="torso">
-            <div 
-              className={`shirt ${avatarState.clothing}`}
-              style={{ backgroundColor: avatarState.colors.shirt }}
-            >
-              {avatarState.clothing === 'business-suit' && (
-                <>
-                  <div 
-                    className="tie" 
-                    style={{ backgroundColor: avatarState.colors.tie }}
-                  ></div>
-                  <div className="suit-jacket" style={{ backgroundColor: avatarState.colors.suit }}>
-                    <div className="lapel left"></div>
-                    <div className="lapel right"></div>
-                    <div className="buttons">
-                      <div className="button"></div>
-                      <div className="button"></div>
-                    </div>
-                  </div>
-                </>
-              )}
+              <div className={`simple-mouth ${avatarState.mood}`}></div>
               
-              {avatarState.clothing === 'wrinkled' && (
-                <div className="wrinkles">
-                  <div className="wrinkle"></div>
-                  <div className="wrinkle"></div>
-                  <div className="wrinkle"></div>
+              {/* Mood indicators */}
+              {avatarState.mood === 'excellent' && (
+                <div className="mood-indicator">😊</div>
+              )}
+              {avatarState.mood === 'good' && (
+                <div className="mood-indicator">🙂</div>
+              )}
+              {avatarState.mood === 'neutral' && (
+                <div className="mood-indicator">😐</div>
+              )}
+              {avatarState.mood === 'concerned' && (
+                <div className="mood-indicator">😟</div>
+              )}
+              {avatarState.mood === 'stressed' && (
+                <div className="mood-indicator">😰</div>
+              )}
+            </div>
+
+            {/* Gesture indicator */}
+            <div className="gesture-indicator">
+              {avatarState.animations.gesture === 'thumbs-up' && '👍'}
+              {avatarState.animations.gesture === 'wave' && '👋'}
+              {avatarState.accessories.includes('briefcase') && '💼'}
+              {avatarState.accessories.includes('coffee') && '☕'}
+            </div>
+          </motion.div>
+
+          {/* Health Score Ring */}
+          <div className="health-score-display">
+            <svg width="150" height="150" viewBox="0 0 150 150" className="health-ring">
+              <circle
+                cx="75"
+                cy="75"
+                r="65"
+                fill="none"
+                stroke="rgba(255,255,255,0.1)"
+                strokeWidth="3"
+              />
+              <motion.circle
+                cx="75"
+                cy="75"
+                r="65"
+                fill="none"
+                stroke={
+                  avatarState.healthScore >= 80 ? '#4ECDC4' :
+                  avatarState.healthScore >= 65 ? '#96CEB4' :
+                  avatarState.healthScore >= 45 ? '#FFEAA7' :
+                  avatarState.healthScore >= 25 ? '#FFB74D' : '#FF6B6B'
+                }
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={`${2 * Math.PI * 65}`}
+                initial={{ strokeDashoffset: 2 * Math.PI * 65 }}
+                animate={{ 
+                  strokeDashoffset: 2 * Math.PI * 65 * (1 - avatarState.healthScore / 100) 
+                }}
+                transition={{ delay: 1, duration: 3, ease: "easeOut" }}
+                transform="rotate(-90 75 75)"
+              />
+            </svg>
+            
+            <div className="score-text">
+              <motion.div 
+                className="score-number"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 2, type: "spring", stiffness: 200 }}
+              >
+                {avatarState.healthScore}
+              </motion.div>
+              <div className="score-label">Financial Health</div>
+            </div>
+          </div>
+
+          {/* Message & Advice */}
+          <motion.div 
+            className="avatar-message-panel"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.5, duration: 0.8 }}
+          >
+            <div className="message-bubble">
+              <h3>{avatarState.message}</h3>
+              <p>{avatarState.advice}</p>
+              
+              {expanded && (
+                <div className="detailed-stats">
+                  <div className="stat">
+                    <span className="stat-label">Monthly Surplus:</span>
+                    <span className="stat-value">${avatarState.surplus.toLocaleString()}</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-label">Emergency Fund:</span>
+                    <span className="stat-value">{avatarState.emergencyMonths.toFixed(1)} months</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-label">Savings Rate:</span>
+                    <span className="stat-value">{(financialData.savingsRate * 100).toFixed(1)}%</span>
+                  </div>
                 </div>
               )}
             </div>
-          </div>
-
-          {/* Arms */}
-          <div className="arms">
-            <motion.div 
-              className={`arm left ${avatarState.animations.gesture}`}
-              animate={
-                avatarState.animations.gesture === 'thumbs-up' 
-                  ? { rotate: [0, 10, 0] }
-                  : avatarState.animations.gesture === 'head-in-hands'
-                  ? { rotate: [0, -30, 0] }
-                  : avatarState.animations.gesture === 'wave'
-                  ? { rotate: [0, 15, -15, 0] }
-                  : {}
-              }
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="hand left">
-                {avatarState.animations.gesture === 'thumbs-up' && '👍'}
-                {avatarState.animations.gesture === 'wave' && '👋'}
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className={`arm right ${avatarState.animations.gesture}`}
-              animate={
-                avatarState.animations.gesture === 'chin-scratch'
-                  ? { rotate: [0, -20, 0] }
-                  : {}
-              }
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="hand right">
-                {avatarState.accessories.includes('briefcase') && '💼'}
-                {avatarState.accessories.includes('phone') && '📱'}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Legs */}
-          <div className="legs">
-            <div 
-              className="pants" 
-              style={{ backgroundColor: avatarState.colors.pants }}
-            >
-              <div className="leg left"></div>
-              <div className="leg right"></div>
-            </div>
-            <div className="feet">
-              <div className="shoe left"></div>
-              <div className="shoe right"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Accessories */}
-        <div className="accessories">
-          {avatarState.accessories.includes('watch') && (
-            <div className="watch">⌚</div>
-          )}
-          {avatarState.accessories.includes('coffee') && (
-            <motion.div 
-              className="coffee"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              ☕
-            </motion.div>
-          )}
-        </div>
-      </motion.div>
-
-      {/* Health Score Ring (Large) */}
-      <div className="health-score-display">
-        <svg width="200" height="200" viewBox="0 0 200 200" className="health-ring">
-          <circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="none"
-            stroke="rgba(255,255,255,0.1)"
-            strokeWidth="4"
-          />
-          <motion.circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="none"
-            stroke={
-              avatarState.healthScore >= 80 ? '#4ECDC4' :
-              avatarState.healthScore >= 65 ? '#96CEB4' :
-              avatarState.healthScore >= 45 ? '#FFEAA7' :
-              avatarState.healthScore >= 25 ? '#FFB74D' : '#FF6B6B'
-            }
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeDasharray={`${2 * Math.PI * 90}`}
-            initial={{ strokeDashoffset: 2 * Math.PI * 90 }}
-            animate={{ 
-              strokeDashoffset: 2 * Math.PI * 90 * (1 - avatarState.healthScore / 100) 
-            }}
-            transition={{ delay: 1, duration: 3, ease: "easeOut" }}
-            transform="rotate(-90 100 100)"
-          />
-        </svg>
-        
-        <div className="score-text">
-          <motion.div 
-            className="score-number"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 2, type: "spring", stiffness: 200 }}
-          >
-            {avatarState.healthScore}
           </motion.div>
-          <div className="score-label">Financial Health</div>
         </div>
-      </div>
-
-      {/* Message & Advice */}
-      <motion.div 
-        className="avatar-message-panel"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.5, duration: 0.8 }}
-      >
-        <div className="message-bubble">
-          <h3>{avatarState.message}</h3>
-          <p>{avatarState.advice}</p>
-          
-          {expanded && (
-            <div className="detailed-stats">
-              <div className="stat">
-                <span className="stat-label">Monthly Surplus:</span>
-                <span className="stat-value">${avatarState.surplus.toLocaleString()}</span>
-              </div>
-              <div className="stat">
-                <span className="stat-label">Emergency Fund:</span>
-                <span className="stat-value">{avatarState.emergencyMonths.toFixed(1)} months</span>
-              </div>
-              <div className="stat">
-                <span className="stat-label">Savings Rate:</span>
-                <span className="stat-value">{(financialData.savingsRate * 100).toFixed(1)}%</span>
-              </div>
-            </div>
-          )}
-        </div>
-      </motion.div>
-    </div>
-  );
+      );
 };
 
 export default FullBodyAvatar; 
