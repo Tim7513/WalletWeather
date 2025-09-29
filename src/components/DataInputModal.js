@@ -157,12 +157,17 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                   exit="exit"
                 >
                   <div className="tab-header">
-                    <button 
+                    <motion.button 
                       className="back-button"
                       onClick={() => setActiveTab('welcome')}
+                      whileHover={{ scale: 1.05, x: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
                     >
                       ← Back
-                    </button>
+                    </motion.button>
                     <h3>Upload Your Financial Data</h3>
                   </div>
                   <CSVUploader 
@@ -181,12 +186,17 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                   exit="exit"
                 >
                   <div className="tab-header">
-                    <button 
+                    <motion.button 
                       className="back-button"
                       onClick={() => setActiveTab('welcome')}
+                      whileHover={{ scale: 1.05, x: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
                     >
                       ← Back
-                    </button>
+                    </motion.button>
                     <h3>Enter Your Financial Information</h3>
                   </div>
                   <ManualEntry 

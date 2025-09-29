@@ -4,6 +4,7 @@ import FinancialWeather from './FinancialWeather';
 import SpendingBubbles from './SpendingBubbles';
 import AIInsights from './AIInsights';
 import FinancialGarden from './FinancialGarden';
+import FinancialAvatar from './FinancialAvatar';
 import DataInputModal from './DataInputModal';
 import './Dashboard.css';
 
@@ -143,6 +144,17 @@ const Dashboard = () => {
             Your personalized financial insights powered by AI
           </motion.p>
         </div>
+        
+        {/* Financial Avatar */}
+        <motion.div 
+          className="header-avatar"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.0, duration: 0.8 }}
+        >
+          <FinancialAvatar financialData={financialData} size="small" />
+        </motion.div>
+        
         <div className="header-actions">
           <motion.div 
             className="balance-display"

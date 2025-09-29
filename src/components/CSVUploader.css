@@ -1,0 +1,220 @@
+.csv-uploader {
+  color: white;
+}
+
+.upload-area {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 40px 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.upload-area.drag-active {
+  border-color: #4ECDC4;
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.upload-area.has-file {
+  border-color: #4ECDC4;
+  background: rgba(78, 205, 196, 0.05);
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-content {
+  cursor: pointer;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.upload-content h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: white;
+}
+
+.upload-content p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 15px 0;
+}
+
+.supported-formats {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.file-icon {
+  font-size: 2rem;
+}
+
+.file-details {
+  flex: 1;
+  text-align: left;
+}
+
+.file-details h4 {
+  margin: 0 0 5px 0;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.file-details p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.remove-file {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: #ff6b6b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-file:hover {
+  background: rgba(255, 0, 0, 0.3);
+}
+
+.error-message {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-icon {
+  font-size: 1.2rem;
+}
+
+.preview-section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.preview-section h4 {
+  color: white;
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+}
+
+.preview-table {
+  margin-bottom: 20px;
+}
+
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.row-number {
+  background: #4ECDC4;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.row-data {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.data-item {
+  font-size: 0.85rem;
+}
+
+.data-item strong {
+  color: #4ECDC4;
+}
+
+.process-button {
+  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.process-button:hover {
+  background: linear-gradient(135deg, #44A08D, #4ECDC4);
+  transform: translateY(-2px);
+}
+
+.process-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.help-section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.help-section h4 {
+  color: white;
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+}
+
+.help-section ul {
+  margin: 0;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.help-section li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+} 

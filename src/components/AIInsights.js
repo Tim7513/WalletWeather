@@ -22,10 +22,12 @@ const AIInsights = ({ data, expanded = false }) => {
           type: 'positive',
           icon: '🎯',
           title: 'Savings Performance',
-          message: surplus > 0 
-            ? `Great job! You're saving $${surplus.toLocaleString()} monthly.`
+          message: surplus >= savingsGoal 
+            ? `Excellent! You're exceeding your 20% savings goal by $${(surplus - savingsGoal).toLocaleString()}.`
+            : surplus > 0 
+            ? `You're saving $${surplus.toLocaleString()} monthly. Try to reach $${savingsGoal.toLocaleString()} (20% goal).`
             : `You're overspending by $${Math.abs(surplus).toLocaleString()} monthly.`,
-          confidence: surplus > 0 ? 92 : 78,
+          confidence: surplus >= savingsGoal ? 96 : surplus > 0 ? 85 : 65,
           action: surplus > 0 
             ? 'Consider increasing your investment allocation'
             : 'Review your largest expense categories',

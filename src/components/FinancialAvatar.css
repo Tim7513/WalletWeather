@@ -1,0 +1,358 @@
+.financial-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* Size variants */
+.financial-avatar.small {
+  --avatar-size: 60px;
+  --ring-size: 70px;
+}
+
+.financial-avatar.medium {
+  --avatar-size: 80px;
+  --ring-size: 95px;
+}
+
+.financial-avatar.large {
+  --avatar-size: 120px;
+  --ring-size: 140px;
+}
+
+.avatar-container {
+  position: relative;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Avatar Face */
+.avatar-face {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-head {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.avatar-hair {
+  position: absolute;
+  top: -5%;
+  left: 15%;
+  right: 15%;
+  height: 35%;
+  background: #8B6F47;
+  border-radius: 50% 50% 20% 20%;
+  z-index: 1;
+}
+
+.avatar-face-shape {
+  width: 100%;
+  height: 85%;
+  background: #F4D1A0;
+  border-radius: 50%;
+  position: relative;
+  border: 3px solid #E8C4A0;
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.1),
+    0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Eyes */
+.avatar-eyes {
+  position: absolute;
+  top: 35%;
+  left: 20%;
+  right: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eye {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid #ddd;
+}
+
+.pupil {
+  width: 6px;
+  height: 6px;
+  background: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+/* Nose */
+.avatar-nose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 6px;
+  background: #E8C4A0;
+  border-radius: 50%;
+  border: 1px solid #D4B596;
+}
+
+/* Mouth - Changes based on mood */
+.avatar-mouth {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 8px;
+  border-radius: 0 0 16px 16px;
+  transition: all 0.5s ease;
+}
+
+.avatar-mouth.excellent {
+  background: #4ECDC4;
+  border: 2px solid #4ECDC4;
+  border-top: none;
+  height: 10px;
+  animation: smile-glow 2s ease-in-out infinite;
+}
+
+.avatar-mouth.good {
+  background: #96CEB4;
+  border: 2px solid #96CEB4;
+  border-top: none;
+  height: 8px;
+}
+
+.avatar-mouth.neutral {
+  width: 12px;
+  height: 2px;
+  background: #999;
+  border-radius: 2px;
+  border: none;
+}
+
+.avatar-mouth.concerned {
+  width: 14px;
+  height: 6px;
+  border: 2px solid #FFB74D;
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  background: none;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.avatar-mouth.stressed {
+  width: 16px;
+  height: 8px;
+  border: 2px solid #FF6B6B;
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  background: none;
+  transform: translateX(-50%) rotate(180deg);
+  animation: stress-mouth 0.8s ease-in-out infinite;
+}
+
+/* Health Score Ring */
+.health-score-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Floating Emojis */
+.floating-emojis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.floating-emoji {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.floating-emoji:nth-child(1) { top: 20%; left: 80%; }
+.floating-emoji:nth-child(2) { top: 10%; right: 85%; }
+.floating-emoji:nth-child(3) { bottom: 20%; left: 85%; }
+
+/* Stress Indicators */
+.stress-indicators {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.stress-emoji {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.stress-emoji:nth-child(1) { top: 15%; right: 80%; }
+.stress-emoji:nth-child(2) { top: 5%; left: 75%; }
+.stress-emoji:nth-child(3) { bottom: 15%; right: 75%; }
+
+/* Avatar Info */
+.avatar-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.avatar-expression {
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.avatar-message {
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  max-width: 180px;
+  line-height: 1.3;
+}
+
+.health-score-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.score-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.score-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Loading State */
+.financial-avatar.loading .avatar-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  opacity: 0.5;
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes smile-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(78, 205, 196, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(78, 205, 196, 0.8); }
+}
+
+@keyframes stress-mouth {
+  0%, 100% { transform: translateX(-50%) rotate(180deg) scale(1); }
+  50% { transform: translateX(-50%) rotate(180deg) scale(1.1); }
+}
+
+@keyframes loading-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* Mood-based pupil movement */
+.financial-avatar.excellent .pupil {
+  animation: happy-eyes 3s ease-in-out infinite;
+}
+
+.financial-avatar.stressed .pupil {
+  animation: nervous-eyes 1s ease-in-out infinite;
+}
+
+@keyframes happy-eyes {
+  0%, 100% { transform: translate(-50%, -50%); }
+  25% { transform: translate(-30%, -50%); }
+  75% { transform: translate(-70%, -50%); }
+}
+
+@keyframes nervous-eyes {
+  0%, 100% { transform: translate(-50%, -50%); }
+  25% { transform: translate(-60%, -40%); }
+  50% { transform: translate(-40%, -60%); }
+  75% { transform: translate(-60%, -50%); }
+}
+
+/* Small size adjustments */
+.financial-avatar.small .avatar-expression {
+  font-size: 12px;
+}
+
+.financial-avatar.small .score-number {
+  font-size: 14px;
+}
+
+.financial-avatar.small .score-label {
+  font-size: 8px;
+}
+
+/* Large size adjustments */
+.financial-avatar.large .avatar-expression {
+  font-size: 16px;
+}
+
+.financial-avatar.large .score-number {
+  font-size: 24px;
+}
+
+.financial-avatar.large .score-label {
+  font-size: 12px;
+}
+
+.financial-avatar.large .avatar-message {
+  font-size: 14px;
+  max-width: 220px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .financial-avatar.medium {
+    --avatar-size: 70px;
+    --ring-size: 85px;
+  }
+  
+  .avatar-message {
+    font-size: 11px;
+  }
+} 

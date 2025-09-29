@@ -47,6 +47,7 @@
   margin-bottom: 30px;
   position: relative;
   overflow: hidden;
+  gap: 2rem;
 }
 
 .dashboard-header::before {
@@ -122,6 +123,33 @@
 .reset-data-btn:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+}
+
+/* Header Avatar */
+.header-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .balance-display {
+    text-align: center;
+  }
 }
 
 /* Dashboard Grid */
