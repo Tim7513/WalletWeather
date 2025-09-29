@@ -4,24 +4,42 @@ import FinancialWeather from './FinancialWeather';
 import SpendingBubbles from './SpendingBubbles';
 import AIInsights from './AIInsights';
 import FinancialGarden from './FinancialGarden';
+import DataInputModal from './DataInputModal';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const [financialData, setFinancialData] = useState({
-    balance: 4250.75,
-    monthlyIncome: 3200,
-    monthlyExpenses: 2850,
-    savingsRate: 0.15,
-    categories: [
-      { name: 'Food', amount: 650, color: '#FF6B6B', percentage: 23 },
-      { name: 'Transport', amount: 320, color: '#4ECDC4', percentage: 11 },
-      { name: 'Entertainment', amount: 280, color: '#45B7D1', percentage: 10 },
-      { name: 'Shopping', amount: 450, color: '#96CEB4', percentage: 16 },
-      { name: 'Bills', amount: 850, color: '#FFEAA7', percentage: 30 },
-      { name: 'Other', amount: 300, color: '#DDA0DD', percentage: 10 }
-    ]
-  });
+  const [showDataModal, setShowDataModal] = useState(false);
+  const [financialData, setFinancialData] = useState(null);
+
+  // Check for existing data on component mount
+  useEffect(() => {
+    const savedData = localStorage.getItem('financialTimeData');
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        setFinancialData(parsedData);
+      } catch (error) {
+        console.error('Error parsing saved data:', error);
+        setShowDataModal(true);
+      }
+    } else {
+      setShowDataModal(true);
+    }
+  }, []);
+
+  const handleDataSubmit = (data) => {
+    // Save to localStorage
+    localStorage.setItem('financialTimeData', JSON.stringify(data));
+    setFinancialData(data);
+    setShowDataModal(false);
+  };
+
+  const handleDataReset = () => {
+    localStorage.removeItem('financialTimeData');
+    setFinancialData(null);
+    setShowDataModal(true);
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.9 },
@@ -52,6 +70,30 @@ const Dashboard = () => {
       }
     }
   };
+
+  // Show loading or data input modal if no data
+  if (!financialData) {
+    return (
+      <>
+        <div className="dashboard-loading">
+          <motion.div
+            className="loading-content"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <div className="loading-icon">⚡</div>
+            <h2>Financial Time Machine</h2>
+            <p>Preparing your personalized financial dashboard...</p>
+          </motion.div>
+        </div>
+        <DataInputModal
+          isOpen={showDataModal}
+          onClose={() => setShowDataModal(false)}
+          onDataSubmit={handleDataSubmit}
+        />
+      </>
+    );
+  }
 
   return (
     <motion.div 
@@ -98,25 +140,38 @@ const Dashboard = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Visualize your financial future with AI-powered insights
+            Your personalized financial insights powered by AI
           </motion.p>
         </div>
-        <motion.div 
-          className="balance-display"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-        >
-          <span className="balance-label">Current Balance</span>
-          <motion.span 
-            className="balance-amount"
+        <div className="header-actions">
+          <motion.div 
+            className="balance-display"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+          >
+            <span className="balance-label">Current Balance</span>
+            <motion.span 
+              className="balance-amount"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+            >
+              ${financialData.balance.toLocaleString()}
+            </motion.span>
+          </motion.div>
+          <motion.button
+            className="reset-data-btn"
+            onClick={handleDataReset}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
           >
-            ${financialData.balance.toLocaleString()}
-          </motion.span>
-        </motion.div>
+            🔄 Update Data
+          </motion.button>
+        </div>
       </motion.header>
 
       {/* Main Grid */}
@@ -216,7 +271,7 @@ const Dashboard = () => {
               whileHover={{ scale: 1.05 }}
             >
               <span className="stat-value">
-                ${(financialData.balance * 12 / financialData.monthlyExpenses).toFixed(1)}
+                {(financialData.balance / financialData.monthlyExpenses).toFixed(1)}
               </span>
               <span className="stat-label">Months of Expenses</span>
             </motion.div>
@@ -257,6 +312,13 @@ const Dashboard = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Data Input Modal */}
+      <DataInputModal
+        isOpen={showDataModal}
+        onClose={() => setShowDataModal(false)}
+        onDataSubmit={handleDataSubmit}
+      />
     </motion.div>
   );
 };
