@@ -160,31 +160,116 @@
   margin-bottom: 30px;
 }
 
-/* Card Styles */
+/* Card Styles - Scrapbook Style */
 .dashboard-card {
   padding: 25px;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-height: 280px;
   display: flex;
   flex-direction: column;
+  background: #fefefe;
+  border: none;
+  border-radius: 8px 12px 6px 14px;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.15),
+    0 2px 4px rgba(0,0,0,0.1);
+  transform: rotate(-0.5deg);
+  transition: all 0.3s ease;
 }
 
+/* Washi Tape Effects */
 .dashboard-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: -8px;
+  left: 20px;
+  width: 60px;
+  height: 25px;
+  background: linear-gradient(45deg, 
+    rgba(255, 182, 193, 0.8) 0%,
+    rgba(255, 192, 203, 0.9) 50%,
+    rgba(255, 182, 193, 0.8) 100%);
+  border-radius: 3px;
+  transform: rotate(-15deg);
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.dashboard-card:hover::before {
-  opacity: 1;
+.dashboard-card::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 30px;
+  width: 40px;
+  height: 20px;
+  background: linear-gradient(45deg, 
+    rgba(173, 216, 230, 0.8) 0%,
+    rgba(135, 206, 235, 0.9) 50%,
+    rgba(173, 216, 230, 0.8) 100%);
+  border-radius: 3px;
+  transform: rotate(25deg);
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Individual card variations */
+.dashboard-card:nth-child(1) { 
+  transform: rotate(1.2deg); 
+  background: #fffef8;
+}
+
+.dashboard-card:nth-child(2) { 
+  transform: rotate(-0.8deg); 
+  background: #fefffe;
+}
+
+.dashboard-card:nth-child(3) { 
+  transform: rotate(0.5deg); 
+  background: #fffffb;
+}
+
+.dashboard-card:nth-child(4) { 
+  transform: rotate(-1.1deg); 
+  background: #fffffe;
+}
+
+.dashboard-card:nth-child(5) { 
+  transform: rotate(0.7deg); 
+  background: #ffffef;
+}
+
+.dashboard-card:nth-child(6) { 
+  transform: rotate(-0.3deg); 
+  background: #fffff9;
+}
+
+/* Different tape colors for each card */
+.dashboard-card:nth-child(2)::before {
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 182, 0.8) 0%,
+    rgba(255, 255, 192, 0.9) 50%,
+    rgba(255, 255, 182, 0.8) 100%);
+}
+
+.dashboard-card:nth-child(3)::before {
+  background: linear-gradient(45deg, 
+    rgba(182, 255, 182, 0.8) 0%,
+    rgba(192, 255, 192, 0.9) 50%,
+    rgba(182, 255, 182, 0.8) 100%);
+}
+
+.dashboard-card:nth-child(4)::before {
+  background: linear-gradient(45deg, 
+    rgba(255, 182, 255, 0.8) 0%,
+    rgba(255, 192, 255, 0.9) 50%,
+    rgba(255, 182, 255, 0.8) 100%);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .card-header {

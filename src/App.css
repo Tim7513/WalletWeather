@@ -1,6 +1,10 @@
 .App {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f5f5dc;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px, 60px 60px;
   position: relative;
   overflow-x: hidden;
 }

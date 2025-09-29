@@ -133,7 +133,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Financial Time Machine
+            Money Check
           </motion.h1>
           <motion.p 
             className="dashboard-subtitle"
@@ -141,7 +141,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Your personalized financial insights powered by AI
+            How's your money doing?
           </motion.p>
         </div>
         
@@ -189,7 +189,7 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('avatar')}
         >
           <div className="card-header">
-            <h3>Your Financial Weather</h3>
+            <h3>How You're Doing</h3>
             <span className="card-icon">🌤️</span>
           </div>
           <div className="avatar-container">
@@ -206,7 +206,7 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('weather')}
         >
           <div className="card-header">
-            <h3>Financial Weather</h3>
+            <h3>Money Weather</h3>
             <span className="card-icon">🌤️</span>
           </div>
           <FinancialWeather data={financialData} />
@@ -221,8 +221,8 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('spending')}
         >
           <div className="card-header">
-            <h3>Spending Universe</h3>
-            <span className="card-icon">🌌</span>
+            <h3>Where Your Money Goes</h3>
+            <span className="card-icon">💸</span>
           </div>
           <SpendingBubbles categories={financialData.categories} />
         </motion.div>
@@ -236,8 +236,8 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('insights')}
         >
           <div className="card-header">
-            <h3>AI Insights</h3>
-            <span className="card-icon">🧠</span>
+            <h3>Some Thoughts</h3>
+            <span className="card-icon">💭</span>
           </div>
           <AIInsights data={financialData} />
         </motion.div>
@@ -251,7 +251,7 @@ const Dashboard = () => {
           onClick={() => setSelectedCard('garden')}
         >
           <div className="card-header">
-            <h3>Financial Garden</h3>
+            <h3>Your Money Garden</h3>
             <span className="card-icon">🌱</span>
           </div>
           <FinancialGarden savingsRate={financialData.savingsRate} />
@@ -265,7 +265,7 @@ const Dashboard = () => {
           whileHover="hover"
         >
           <div className="card-header">
-            <h3>Quick Stats</h3>
+            <h3>The Numbers</h3>
             <span className="card-icon">📊</span>
           </div>
           <div className="stats-grid">
