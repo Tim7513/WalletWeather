@@ -21,7 +21,6 @@
     "date-fns": "^2.30.0",
     "react-router-dom": "^6.17.0",
     "axios": "^1.5.1",
-    "react-speech-kit": "^3.0.1",
     "react-intersection-observer": "^9.5.2",
     "react-use-gesture": "^9.1.3"
   },
