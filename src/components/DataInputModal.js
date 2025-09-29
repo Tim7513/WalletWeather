@@ -81,7 +81,7 @@ const DataInputModal = ({ isOpen, onClose, onDataSubmit }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Welcome to Money Check
+                  Welcome to Wallet Weather
                 </motion.h2>
                 <motion.button 
                   className="modal-close" 

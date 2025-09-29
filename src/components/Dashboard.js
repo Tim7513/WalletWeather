@@ -134,7 +134,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Money Check
+            Wallet Weather
           </motion.h1>
           <motion.p 
             className="dashboard-subtitle"
